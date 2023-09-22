@@ -136,8 +136,16 @@ function dci_get_sercheable_tipologie() {
         'servizio',
         'persona_pubblica',
         'dataset',
-        'page',
-        'post'
+        'bando_concorso',
+        'bando_gara',
+        'bando_sociale',
+        'galleria_foto',
+        'amm_trasp',
+        'regolamento',
+        'domanda_frequente',
+        'seduta_consiliare',
+        'commissione_cons',
+        'glossario_rifiuto',
     );
     if ( post_type_exists( 'amm-trasparente' ) ) { // Compatibilità plugin amministrazione-trasparente
         $arrayTipologie[] = 'amm-trasparente';
