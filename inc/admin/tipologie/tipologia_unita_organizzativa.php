@@ -22,7 +22,7 @@ function dci_register_post_type_unita_organizzativa() {
         'public'        => true,
         'menu_position' => 5,
         'menu_icon'     => 'dashicons-admin-multisite',
-        'has_archive'   => true,
+        'has_archive'   => false,
         'rewrite' => array('slug' => 'amministrazione/unita_organizzativa','with_front' => false),
         'capability_type' => array('unita_organizzativa', 'unita_organizzative'),
         'map_meta_cap'    => true,
