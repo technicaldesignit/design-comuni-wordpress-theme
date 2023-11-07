@@ -428,9 +428,25 @@ class Breadcrumb_Trail
 						break;
 					case 'Amministrazione':
 						global $post;
-						$this->items[] =  "<a href='" . home_url("amministrazione") . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
-						$this->items[] = "<a href='" . get_term_link(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->term_id) . "'>" . get_formatted_name(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->name) . "</a>";
-						$this->items[] = get_the_title();
+						if (get_post_type($post->ID) == 'unita_organizzativa') {
+							$this->items[] =  "<a href='" . home_url("amministrazione") . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+							$this->items[] = "<a href='" . get_term_link(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->term_id) . "'>" . get_formatted_name(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->name) . "</a>";
+							$this->items[] = get_the_title();
+						} else {
+							//Gestione politici e personale amministrativo
+							$this->items[] =  "<a href='" . home_url("amministrazione") . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+							$incarichi = dci_get_meta("incarichi", "_dci_persona_pubblica_", $post->ID);
+							if (count($incarichi) == 1) {
+								$incarico_id = $incarichi[0];
+								$term = get_the_terms($incarico_id, 'tipi_incarico')[0];
+								$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+							} else {
+								$ruolo = get_query_var('ruolo');
+								$term = get_term_by('slug', $ruolo, 'tipi_incarico');
+								$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+							}
+							$this->items[] = get_the_title();
+						}
 						return;
 						break;
 					case 'Servizi':
