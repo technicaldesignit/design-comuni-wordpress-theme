@@ -442,8 +442,14 @@ class Breadcrumb_Trail
 								$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
 							} else {
 								$ruolo = get_query_var('ruolo');
-								$term = get_term_by('slug', $ruolo, 'tipi_incarico');
-								$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+								if ($ruolo != "") {
+									$term = get_term_by('slug', $ruolo, 'tipi_incarico');
+									$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+								} else {
+									$incarico_id = $incarichi[0];
+									$term = get_the_terms($incarico_id, 'tipi_incarico')[0];
+									$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+								}
 							}
 							$this->items[] = get_the_title();
 						}
