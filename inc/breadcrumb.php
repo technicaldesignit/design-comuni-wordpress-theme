@@ -347,9 +347,6 @@ class Breadcrumb_Trail
 					$r = "Aree Amministrative";
 					break;
 				case "struttura politica":
-				case "commissione":
-				case "consiglio comunale":
-				case "giunta comunale":
 					$r = "Organi Di Governo";
 					break;
 				case "politico":
@@ -361,6 +358,7 @@ class Breadcrumb_Trail
 				case "ente":
 					$r = "Enti e Fondazioni";
 					break;
+				default: $r = ucfirst($slug);
 			}
 
 			return $r;
@@ -436,21 +434,26 @@ class Breadcrumb_Trail
 							//Gestione politici e personale amministrativo
 							$this->items[] =  "<a href='" . home_url("amministrazione") . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
 							$incarichi = dci_get_meta("incarichi", "_dci_persona_pubblica_", $post->ID);
-							if (count($incarichi) == 1) {
-								$incarico_id = $incarichi[0];
-								$term = get_the_terms($incarico_id, 'tipi_incarico')[0];
-								$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
-							} else {
-								$ruolo = get_query_var('ruolo');
-								if ($ruolo != "") {
-									$term = get_term_by('slug', $ruolo, 'tipi_incarico');
-									$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
-								} else {
+
+							if (isset($incarichi) && is_array($incarichi) && count($incarichi) > 0) {
+								if (count($incarichi) == 1) {
 									$incarico_id = $incarichi[0];
 									$term = get_the_terms($incarico_id, 'tipi_incarico')[0];
+									var_dump($term);
 									$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+								} else {
+									$ruolo = get_query_var('ruolo');
+									if ($ruolo != "") {
+										$term = get_term_by('slug', $ruolo, 'tipi_incarico');
+										$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+									} else {
+										$incarico_id = $incarichi[0];
+										$term = get_the_terms($incarico_id, 'tipi_incarico')[0];
+										$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+									}
 								}
 							}
+
 							$this->items[] = get_the_title();
 						}
 						return;
