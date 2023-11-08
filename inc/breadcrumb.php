@@ -430,7 +430,13 @@ class Breadcrumb_Trail
 				//console_log($group_name);
 				switch ($group_name) {
 					case 'Vivere il comune':
+						$post_type = get_post_type($post->ID);
 						$this->items[] =  "<a href='" . home_url("vivere-il-comune") . "'>" . __("Vivere il Comune", "design_comuni_italia") . "</a>";
+						if($post_type == "evento") {
+							$this->items[] =  "<a href='" . home_url("eventi") . "'>" . __("Eventi", "design_comuni_italia") . "</a>";
+						} else if ($post_type == "luogo") {
+							$this->items[] =  "<a href='" . home_url("luoghi") . "'>" . __("Luoghi", "design_comuni_italia") . "</a>";
+						}
 						$this->items[] = get_the_title();
 						return;
 						break;
