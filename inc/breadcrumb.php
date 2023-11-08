@@ -358,7 +358,17 @@ class Breadcrumb_Trail
 				case "ente":
 					$r = "Enti e Fondazioni";
 					break;
-				default: $r = ucfirst($slug);
+				case "notizia":
+					$r = "Notizie";
+					break;
+				case "avviso":
+					$r = "Avvisi";
+					break;
+				case "comunicati":
+					$r = "Comunicati";
+					break;
+				default:
+					$r = ucfirst($slug);
 			}
 
 			return $r;
@@ -391,7 +401,7 @@ class Breadcrumb_Trail
 			}
 
 			if (is_singular()) {
-
+				global $post;
 				if (get_post_type() == 'servizio') {
 					$this->items[] =  "<a href='" . home_url("servizi") . "'>" . __("Servizi", "design_comuni_italia") . "</a>";
 					$terms = get_the_terms(get_the_ID(), 'categorie_servizio');
@@ -425,7 +435,6 @@ class Breadcrumb_Trail
 						return;
 						break;
 					case 'Amministrazione':
-						global $post;
 						if (get_post_type($post->ID) == 'unita_organizzativa') {
 							$this->items[] =  "<a href='" . home_url("amministrazione") . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
 							$this->items[] = "<a href='" . get_term_link(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->term_id) . "'>" . get_formatted_name(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->name) . "</a>";
@@ -439,7 +448,6 @@ class Breadcrumb_Trail
 								if (count($incarichi) == 1) {
 									$incarico_id = $incarichi[0];
 									$term = get_the_terms($incarico_id, 'tipi_incarico')[0];
-									var_dump($term);
 									$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
 								} else {
 									$ruolo = get_query_var('ruolo');
@@ -465,6 +473,7 @@ class Breadcrumb_Trail
 						break;
 					case 'Novità':
 						$this->items[] =  "<a href='" . home_url("novita") . "'>" . __("Novità", "design_comuni_italia") . "</a>";
+						$this->items[] = "<a href='" . get_term_link(get_the_terms($post->ID, 'tipi_notizia')[0]->term_id) . "'>" . get_formatted_name(get_the_terms($post->ID, 'tipi_notizia')[0]->name) . "</a>";
 						$this->items[] = get_the_title();
 						return;
 						break;
