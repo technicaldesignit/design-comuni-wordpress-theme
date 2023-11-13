@@ -23,9 +23,9 @@ function dci_register_post_type_servizio() {
 	$args = array(
 		'label'            => __( 'Servizio', 'design_comuni_italia' ),
 		'labels'           => $labels,
-		'supports'         => array( 'title', 'editor', 'thumbnail' ),
+		'supports'         => array( 'title', 'editor', 'thumbnail', 'something-else', 'has-archive', 'page-attributes'),
 //		'taxonomies'       => array( 'tipologia' ),
-		'hierarchical'     => false,
+		'hierarchical'     => true,
 		'public'           => true,
         'menu_position'    => 5,
         'menu_icon'        => 'dashicons-id-alt',

@@ -222,7 +222,16 @@ class Breadcrumb_Trail
 
 				//Categorie di servizio
 				if (get_post_type() == 'servizio' && $item_position > 3  && $item_position < $item_count) {
-					$separator = sprintf('<span class="separator">-</span>');
+					global $post;
+					if ($post->post_parent != 0) {
+						if ($item_position == $item_count - 1) {
+							$separator = sprintf('<span class="separator">/</span>');
+						} else {
+							$separator = sprintf('<span class="separator">-</span>');
+						}
+					} else {
+						$separator = sprintf('<span class="separator">-</span>');
+					}
 				}
 
 				if (1 === $item_position && 1 < $item_count)
@@ -410,6 +419,11 @@ class Breadcrumb_Trail
 							$this->items[] = sprintf('<a href="%s">%s</a>', esc_url(get_term_link($term, 'categorie_servizio')), $term->name);
 						}
 					}
+					$parent_id = wp_get_post_parent_id($post->id);
+					if ($parent_id != 0) {
+						$parent = get_post($parent_id);
+						$this->items[] =  "<a href='" . esc_url(get_permalink($parent->ID)) . "'>" . $parent->post_name . "</a>";
+					}
 					$this->items[] = get_the_title();
 					return;
 				}
@@ -432,7 +446,7 @@ class Breadcrumb_Trail
 					case 'Vivere il comune':
 						$post_type = get_post_type($post->ID);
 						$this->items[] =  "<a href='" . home_url("vivere-il-comune") . "'>" . __("Vivere il Comune", "design_comuni_italia") . "</a>";
-						if($post_type == "evento") {
+						if ($post_type == "evento") {
 							$this->items[] =  "<a href='" . home_url("eventi") . "'>" . __("Eventi", "design_comuni_italia") . "</a>";
 						} else if ($post_type == "luogo") {
 							$this->items[] =  "<a href='" . home_url("luoghi") . "'>" . __("Luoghi", "design_comuni_italia") . "</a>";
