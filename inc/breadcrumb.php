@@ -468,7 +468,9 @@ class Breadcrumb_Trail
 								if (count($incarichi) == 1) {
 									$incarico_id = $incarichi[0];
 									$term = get_the_terms($incarico_id, 'tipi_incarico')[0];
-									$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+									if (isset($term)) {
+										$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+									}
 								} else {
 									$ruolo = get_query_var('ruolo');
 									if ($ruolo != "") {
