@@ -472,6 +472,11 @@ class Breadcrumb_Trail
 										$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
 									} else {
 										$ufficio_id = get_query_var('ufficio');
+
+										if ($ufficio_id == "") {
+											$ufficio_id = dci_get_meta("organizzazioni", "_dci_persona_pubblica_", $post->ID)[0] ?? "";
+										}
+
 										if ($ufficio_id !== "") {
 											$term = get_the_terms($ufficio_id, "tipi_unita_organizzativa")[0];
 											$ufficio = get_post($ufficio_id);
@@ -493,6 +498,11 @@ class Breadcrumb_Trail
 								}
 							} else {
 								$ufficio_id = get_query_var('ufficio');
+
+								if ($ufficio_id == "") {
+									$ufficio_id = dci_get_meta("organizzazioni", "_dci_persona_pubblica_", $post->ID)[0] ?? "";
+								}
+
 								if ($ufficio_id !== "") {
 									$term = get_the_terms($ufficio_id, "tipi_unita_organizzativa")[0];
 									$ufficio = get_post($ufficio_id);
