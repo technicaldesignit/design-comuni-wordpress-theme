@@ -456,12 +456,12 @@ class Breadcrumb_Trail
 						break;
 					case 'Amministrazione':
 						if (get_post_type($post->ID) == 'unita_organizzativa') {
-							$this->items[] =  "<a href='" . home_url("amministrazione") . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+							$this->items[] =  "<a href='" . home_url(__("Amministrazione", "design_comuni_italia")) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
 							$this->items[] = "<a href='" . get_term_link(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->term_id) . "'>" . get_formatted_name(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->name) . "</a>";
 							$this->items[] = get_the_title();
 						} else {
 							//Gestione politici e personale amministrativo
-							$this->items[] =  "<a href='" . home_url("amministrazione") . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+							$this->items[] =  "<a href='" . home_url(__("Amministrazione", "design_comuni_italia")) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
 							$incarichi = dci_get_meta("incarichi", "_dci_persona_pubblica_", $post->ID);
 
 							if (isset($incarichi) && is_array($incarichi) && count($incarichi) > 0) {
@@ -481,7 +481,10 @@ class Breadcrumb_Trail
 											$term = get_the_terms($ufficio_id, "tipi_unita_organizzativa")[0];
 											$ufficio = get_post($ufficio_id);
 
-											$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+											if (isset($term)) {
+												$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+											}
+
 											$this->items[] = "<a href='" . get_permalink($ufficio_id) . "'>" . $ufficio->post_title . "</a>";
 										}
 									}
@@ -507,7 +510,10 @@ class Breadcrumb_Trail
 									$term = get_the_terms($ufficio_id, "tipi_unita_organizzativa")[0];
 									$ufficio = get_post($ufficio_id);
 
-									$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+									if (isset($term)) {
+										$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+									}
+
 									$this->items[] = "<a href='" . get_permalink($ufficio_id) . "'>" . $ufficio->post_title . "</a>";
 								}
 							}
@@ -517,12 +523,12 @@ class Breadcrumb_Trail
 						return;
 						break;
 					case 'Servizi':
-						$this->items[] =  "<a href='" . home_url("servizi") . "'>" . __("Servizi", "design_comuni_italia") . "</a>";
+						$this->items[] =  "<a href='" . home_url(__("Servizi", "design_comuni_italia")) . "'>" . __("Servizi", "design_comuni_italia") . "</a>";
 						$this->items[] = get_the_title();
 						return;
 						break;
 					case 'Novità':
-						$this->items[] =  "<a href='" . home_url("novita") . "'>" . __("Novità", "design_comuni_italia") . "</a>";
+						$this->items[] =  "<a href='" . home_url(__("Novità", "design_comuni_italia")) . "'>" . __("Novità", "design_comuni_italia") . "</a>";
 						$this->items[] = "<a href='" . get_term_link(get_the_terms($post->ID, 'tipi_notizia')[0]->term_id) . "'>" . get_formatted_name(get_the_terms($post->ID, 'tipi_notizia')[0]->name) . "</a>";
 						$this->items[] = get_the_title();
 						return;
