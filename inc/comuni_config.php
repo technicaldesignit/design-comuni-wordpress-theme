@@ -146,6 +146,7 @@ function dci_get_sercheable_tipologie() {
         'seduta_consiliare',
         'commissione_cons',
         'glossario_rifiuto',
+        'page'
     );
     if ( post_type_exists( 'amm-trasparente' ) ) { // Compatibilità plugin amministrazione-trasparente
         $arrayTipologie[] = 'amm-trasparente';
