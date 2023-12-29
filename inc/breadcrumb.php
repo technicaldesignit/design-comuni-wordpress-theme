@@ -343,7 +343,16 @@ class Breadcrumb_Trail
 	 */
 	protected function add_items()
 	{
+		function ml_home_url($slug, $lang)
+		{
+			if ($lang == "it") {
+				$lang = "";
+			} else {
+				$lang = $lang . "/";
+			}
 
+			return strtolower(home_url($lang . __($slug, "design_comuni_italia")));
+		}
 
 		function get_formatted_name($slug)
 		{
@@ -410,9 +419,10 @@ class Breadcrumb_Trail
 			}
 
 			if (is_singular()) {
-				global $post;
+				global $post, $lang;
+
 				if (get_post_type() == 'servizio') {
-					$this->items[] =  "<a href='" . home_url("servizi") . "'>" . __("Servizi", "design_comuni_italia") . "</a>";
+					$this->items[] =  "<a href='" . ml_home_url("Servizi", $lang) . "'>" . __("Servizi", "design_comuni_italia") . "</a>";
 					$terms = get_the_terms(get_the_ID(), 'categorie_servizio');
 					if ($terms) {
 						foreach ($terms as $term) {
@@ -445,23 +455,23 @@ class Breadcrumb_Trail
 				switch ($group_name) {
 					case 'Vivere il comune':
 						$post_type = get_post_type($post->ID);
-						$this->items[] =  "<a href='" . home_url("vivere-il-comune") . "'>" . __("Vivere il Comune", "design_comuni_italia") . "</a>";
+						$this->items[] =  "<a href='" . ml_home_url("vivere-il-comune", $lang) . "'>" . __("Vivere il Comune", "design_comuni_italia") . "</a>";
 						if ($post_type == "evento") {
-							$this->items[] =  "<a href='" . home_url("eventi") . "'>" . __("Eventi", "design_comuni_italia") . "</a>";
+							$this->items[] =  "<a href='" . ml_home_url("Eventi", $lang) . "'>" . __("Eventi", "design_comuni_italia") . "</a>";
 						} else if ($post_type == "luogo") {
-							$this->items[] =  "<a href='" . home_url("luoghi") . "'>" . __("Luoghi", "design_comuni_italia") . "</a>";
+							$this->items[] =  "<a href='" . ml_home_url("Luoghi", $lang) . "'>" . __("Luoghi", "design_comuni_italia") . "</a>";
 						}
 						$this->items[] = get_the_title();
 						return;
 						break;
 					case 'Amministrazione':
 						if (get_post_type($post->ID) == 'unita_organizzativa') {
-							$this->items[] =  "<a href='" . home_url(__("Amministrazione", "design_comuni_italia")) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+							$this->items[] =  "<a href='" . ml_home_url("Amministrazione", $lang) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
 							$this->items[] = "<a href='" . get_term_link(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->term_id) . "'>" . get_formatted_name(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->name) . "</a>";
 							$this->items[] = get_the_title();
 						} else {
 							//Gestione politici e personale amministrativo
-							$this->items[] =  "<a href='" . home_url(__("Amministrazione", "design_comuni_italia")) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+							$this->items[] =  "<a href='" . ml_home_url("Amministrazione", $lang) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
 							$incarichi = dci_get_meta("incarichi", "_dci_persona_pubblica_", $post->ID);
 
 							if (isset($incarichi) && is_array($incarichi) && count($incarichi) > 0) {
@@ -523,12 +533,12 @@ class Breadcrumb_Trail
 						return;
 						break;
 					case 'Servizi':
-						$this->items[] =  "<a href='" . home_url(__("Servizi", "design_comuni_italia")) . "'>" . __("Servizi", "design_comuni_italia") . "</a>";
+						$this->items[] =  "<a href='" . ml_home_url("Servizi", $lang) . "'>" . __("Servizi", "design_comuni_italia") . "</a>";
 						$this->items[] = get_the_title();
 						return;
 						break;
 					case 'Novità':
-						$this->items[] =  "<a href='" . home_url(__("Novità", "design_comuni_italia")) . "'>" . __("Novità", "design_comuni_italia") . "</a>";
+						$this->items[] = "<a href='" . ml_home_url("Novità", $lang) . "'>" . __("Novità", "design_comuni_italia") . "</a>";
 						$this->items[] = "<a href='" . get_term_link(get_the_terms($post->ID, 'tipi_notizia')[0]->term_id) . "'>" . get_formatted_name(get_the_terms($post->ID, 'tipi_notizia')[0]->name) . "</a>";
 						$this->items[] = get_the_title();
 						return;
@@ -555,17 +565,17 @@ class Breadcrumb_Trail
 				} elseif (is_category() || is_tag() || is_tax()) {
 
 					if (is_tax(array("categorie_servizio"))) {
-						$this->items[] = "<a href='" . home_url("servizi") . "'>" . __("Servizi", "design_comuni_italia") . "</a>";
+						$this->items[] = "<a href='" . ml_home_url("Servizi", $lang) . "'>" . __("Servizi", "design_comuni_italia") . "</a>";
 						$this->items[] = single_term_title('', false);
 					} else if (is_tax(array("argomenti"))) {
-						$this->items[] = "<a href='" . home_url("argomenti") . "'>" . __("Argomenti", "design_comuni_italia") . "</a>";
+						$this->items[] = "<a href='" . ml_home_url("Argomenti", $lang) . "'>" . __("Argomenti", "design_comuni_italia") . "</a>";
 						$this->items[] = single_term_title('', false);
 					} else if (is_tax(array("tipi_documento"))) {
-						$this->items[] = "<a href='" . home_url("documenti-e-dati") . "'>" . __("Documenti e dati", "design_comuni_italia") . "</a>";
+						$this->items[] = "<a href='" . ml_home_url("documenti-e-dati", $lang) . "'>" . __("Documenti e dati", "design_comuni_italia") . "</a>";
 						$term_name = single_term_title('', false);
 						$this->items[] = __(dci_get_breadcrumb_label($term_name), "design_comuni_italia");
 					} else if (is_tax(array("tipi_notizia"))) {
-						$this->items[] = "<a href='" . home_url("novita") . "'>" . __("Novità", "design_comuni_italia") . "</a>";
+						$this->items[] = "<a href='" . ml_home_url("Novità", $lang) . "'>" . __("Novità", "design_comuni_italia") . "</a>";
 						$term_name = single_term_title('', false);
 						$this->items[] = __(dci_get_breadcrumb_label($term_name), "design_comuni_italia");
 					} else {
