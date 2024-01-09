@@ -140,7 +140,6 @@ function dci_get_sercheable_tipologie() {
         'bando_gara',
         'bando_sociale',
         'galleria_foto',
-        'amm_trasp',
         'regolamento',
         'domanda_frequente',
         'seduta_consiliare',
@@ -148,6 +147,11 @@ function dci_get_sercheable_tipologie() {
         'glossario_rifiuto',
         'page'
     );
+
+    if(get_option('tema')['disabilita_amm_trasp'] != "on") {
+        $arrayTipologie[] = 'amm_trasp';
+    }
+
     if ( post_type_exists( 'amm-trasparente' ) ) { // Compatibilità plugin amministrazione-trasparente
         $arrayTipologie[] = 'amm-trasparente';
     }
