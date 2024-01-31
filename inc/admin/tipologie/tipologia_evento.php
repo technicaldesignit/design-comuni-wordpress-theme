@@ -28,7 +28,7 @@ function dci_register_post_type_evento() {
         'menu_position' => 5,
         'menu_icon'             => 'dashicons-tickets-alt',
         'has_archive'           => false,
-        'rewrite' => array('slug' => 'vivere-il-comune/eventi', 'with_front' => false),
+        'rewrite' => array('slug' => 'eventi', 'with_front' => false),
         'capability_type' => array('evento', 'eventi'),
         'map_meta_cap'    => true,
         'description'    => __( "Tipologia che struttura le informazioni relative a un evento di interesse pubblico pubblicato sul sito di un comune", 'design_comuni_italia' ),

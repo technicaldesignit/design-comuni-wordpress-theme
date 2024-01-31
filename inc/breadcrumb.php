@@ -484,6 +484,14 @@ class Breadcrumb_Trail
 					return;
 				}
 
+				if (get_post_type() == 'evento') {
+					$this->items[] =  "<a href='" . home_url("vivere-il-comune") . "'>" . __("Vivere il comune", "design_comuni_italia") . "</a>";
+					$this->items[] =  "<a href='" . home_url("eventi") . "'>" . __("Eventi", "design_comuni_italia") . "</a>";
+					if($_GET['passato'] == 'true') $this->items[] =  "<a href='" . home_url("eventi-passati") . "'>" . __("Eventi passati", "design_comuni_italia") . "</a>";
+					$this->items[] = get_the_title();
+					return;
+				}
+
 				$group_name = dci_get_group_name(get_post_type());
 				//console_log($group_name);
 				switch ($group_name) {
