@@ -620,7 +620,11 @@ class Breadcrumb_Trail
 						$this->items[] = "<a href='" . ml_home_url("Novità", $lang) . "'>" . __("Novità", "design_comuni_italia") . "</a>";
 						$term_name = single_term_title('', false);
 						$this->items[] = __(dci_get_breadcrumb_label($term_name), "design_comuni_italia");
-					} else {
+					} else if (is_tax(array("tipi_incarico"))) {
+						$this->items[] = "<a href='" . ml_home_url("Amministrazione", $lang) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+						$term_name = single_term_title('', false);
+						$this->items[] = get_formatted_name($term_name);
+					}  else {
 						$this->add_term_archive_items();
 					}
 				} elseif (is_author())
