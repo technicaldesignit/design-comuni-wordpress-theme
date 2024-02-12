@@ -487,7 +487,7 @@ class Breadcrumb_Trail
 				if (get_post_type() == 'evento') {
 					$this->items[] =  "<a href='" . home_url("vivere-il-comune") . "'>" . __("Vivere il comune", "design_comuni_italia") . "</a>";
 					$this->items[] =  "<a href='" . home_url("eventi") . "'>" . __("Eventi", "design_comuni_italia") . "</a>";
-					if($_GET['passato'] == 'true') $this->items[] =  "<a href='" . home_url("eventi-passati") . "'>" . __("Eventi passati", "design_comuni_italia") . "</a>";
+					if ($_GET['passato'] == 'true') $this->items[] =  "<a href='" . home_url("eventi-passati") . "'>" . __("Eventi passati", "design_comuni_italia") . "</a>";
 					$this->items[] = get_the_title();
 					return;
 				}
@@ -507,9 +507,15 @@ class Breadcrumb_Trail
 						return;
 						break;
 					case 'Amministrazione':
+						$term = get_the_terms($post->ID, 'tipi_unita_organizzativa')[0];
 						if (get_post_type($post->ID) == 'unita_organizzativa') {
 							$this->items[] =  "<a href='" . ml_home_url("Amministrazione", $lang) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
-							$this->items[] = "<a href='" . get_term_link(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->term_id) . "'>" . get_formatted_name(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->name) . "</a>";
+							if ($term->name == 'consiglio comunale' || $term->name == 'giunta comunale' || $term->name == 'commissione') {
+								$this->items[] = "<a href='" . get_term_link($term->parent) . "'>" . get_formatted_name('struttura politica') . "</a>";
+							} else {
+								$this->items[] = "<a href='" . get_term_link(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->term_id) . "'>" . get_formatted_name(get_the_terms($post->ID, 'tipi_unita_organizzativa')[0]->name) . "</a>";
+							}
+
 							$this->items[] = get_the_title();
 						} else {
 							//Gestione politici e personale amministrativo
@@ -624,7 +630,7 @@ class Breadcrumb_Trail
 						$this->items[] = "<a href='" . ml_home_url("Amministrazione", $lang) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
 						$term_name = single_term_title('', false);
 						$this->items[] = get_formatted_name($term_name);
-					}  else {
+					} else {
 						$this->add_term_archive_items();
 					}
 				} elseif (is_author())
