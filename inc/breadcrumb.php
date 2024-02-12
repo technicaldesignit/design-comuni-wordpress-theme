@@ -522,8 +522,8 @@ class Breadcrumb_Trail
 							$this->items[] =  "<a href='" . ml_home_url("Amministrazione", $lang) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
 							$incarichi = dci_get_meta("incarichi", "_dci_persona_pubblica_", $post->ID);
 
-							if (isset($incarichi) && is_array($incarichi) && count($incarichi) > 0) {
-								if (count($incarichi) == 1) {
+							if ((isset($incarichi) && is_array($incarichi) && count($incarichi) > 0) || get_query_var("ruolo") != "") {
+								if (isset($incarichi) && is_array($incarichi) && count($incarichi) > 0) {
 									$incarico_id = $incarichi[0];
 									$term = get_the_terms($incarico_id, 'tipi_incarico')[0];
 									if (isset($term)) {
