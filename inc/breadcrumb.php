@@ -488,6 +488,25 @@ class Breadcrumb_Trail
 					$this->items[] =  "<a href='" . home_url("vivere-il-comune") . "'>" . __("Vivere il comune", "design_comuni_italia") . "</a>";
 					$this->items[] =  "<a href='" . home_url("eventi") . "'>" . __("Eventi", "design_comuni_italia") . "</a>";
 					if ($_GET['passato'] == 'true') $this->items[] =  "<a href='" . home_url("eventi-passati") . "'>" . __("Eventi passati", "design_comuni_italia") . "</a>";
+					$terms = get_the_terms(get_the_ID(), 'tipi_evento');
+					if ($terms) {
+						foreach ($terms as $term) {
+							$this->items[] = sprintf('<a href="%s">%s</a>', esc_url(get_term_link($term, 'tipi_evento')), $term->name);
+						}
+					}
+					$this->items[] = get_the_title();
+					return;
+				}
+
+				if (get_post_type() == 'luogo') {
+					$this->items[] =  "<a href='" . home_url("vivere-il-comune") . "'>" . __("Vivere il comune", "design_comuni_italia") . "</a>";
+					$this->items[] =  "<a href='" . home_url("luoghi") . "'>" . __("Luoghi", "design_comuni_italia") . "</a>";
+					$terms = get_the_terms(get_the_ID(), 'tipi_luogo');
+					if ($terms) {
+						foreach ($terms as $term) {
+							$this->items[] = sprintf('<a href="%s">%s</a>', esc_url(get_term_link($term, 'tipi_luogo')), $term->name);
+						}
+					}
 					$this->items[] = get_the_title();
 					return;
 				}
@@ -628,6 +647,16 @@ class Breadcrumb_Trail
 						$this->items[] = __(dci_get_breadcrumb_label($term_name), "design_comuni_italia");
 					} else if (is_tax(array("tipi_incarico"))) {
 						$this->items[] = "<a href='" . ml_home_url("Amministrazione", $lang) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+						$term_name = single_term_title('', false);
+						$this->items[] = get_formatted_name($term_name);
+					} else if (is_tax(array("tipi_evento"))) {
+						$this->items[] = "<a href='" . ml_home_url("vivere-il-comune", $lang) . "'>" . __("Vivere il comune", "design_comuni_italia") . "</a>";
+						$this->items[] = "<a href='" . ml_home_url("eventi", $lang) . "'>" . __("Eventi", "design_comuni_italia") . "</a>";
+						$term_name = single_term_title('', false);
+						$this->items[] = get_formatted_name($term_name);
+					} else if (is_tax(array("tipi_luogo"))) {
+						$this->items[] = "<a href='" . ml_home_url("vivere-il-comune", $lang) . "'>" . __("Vivere il comune", "design_comuni_italia") . "</a>";
+						$this->items[] = "<a href='" . ml_home_url("luoghi", $lang) . "'>" . __("Luoghi", "design_comuni_italia") . "</a>";
 						$term_name = single_term_title('', false);
 						$this->items[] = get_formatted_name($term_name);
 					} else {
