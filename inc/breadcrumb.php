@@ -234,6 +234,20 @@ class Breadcrumb_Trail
 					}
 				}
 
+				//Categorie di servizio
+				if (get_post_type() == 'luogo' && $item_position > 4  && $item_position < $item_count) {
+					global $post;
+					if ($post->post_parent != 0) {
+						if ($item_position == $item_count - 1) {
+							$separator = sprintf('<span class="separator">/</span>');
+						} else {
+							$separator = sprintf('<span class="separator">-</span>');
+						}
+					} else {
+						$separator = sprintf('<span class="separator">-</span>');
+					}
+				}
+
 				if (1 === $item_position && 1 < $item_count)
 					$item_class .= ' trail-begin';
 
