@@ -556,30 +556,7 @@ class Breadcrumb_Trail
 							$incarichi = dci_get_meta("incarichi", "_dci_persona_pubblica_", $post->ID);
 
 							if ((isset($incarichi) && is_array($incarichi) && count($incarichi) > 0) || get_query_var("ruolo") != "") {
-								if (isset($incarichi) && is_array($incarichi) && count($incarichi) > 0) {
-									$incarico_id = $incarichi[0];
-									$term = get_the_terms($incarico_id, 'tipi_incarico')[0];
-									if (isset($term)) {
-										$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
-									} else {
-										$ufficio_id = get_query_var('ufficio');
-
-										if ($ufficio_id == "") {
-											$ufficio_id = dci_get_meta("organizzazioni", "_dci_persona_pubblica_", $post->ID)[0] ?? "";
-										}
-
-										if ($ufficio_id !== "") {
-											$term = get_the_terms($ufficio_id, "tipi_unita_organizzativa")[0];
-											$ufficio = get_post($ufficio_id);
-
-											if (isset($term)) {
-												$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
-											}
-
-											$this->items[] = "<a href='" . get_permalink($ufficio_id) . "'>" . $ufficio->post_title . "</a>";
-										}
-									}
-								} else {
+								if (get_query_var("ruolo") != "") {
 									$ruolo = get_query_var('ruolo');
 									if ($ruolo != "") {
 										$term = get_term_by('slug', $ruolo, 'tipi_incarico');
@@ -588,6 +565,31 @@ class Breadcrumb_Trail
 										$incarico_id = $incarichi[0];
 										$term = get_the_terms($incarico_id, 'tipi_incarico')[0];
 										$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+									}
+								} else {
+									if (isset($incarichi) && is_array($incarichi) && count($incarichi) > 0) {
+										$incarico_id = $incarichi[0];
+										$term = get_the_terms($incarico_id, 'tipi_incarico')[0];
+										if (isset($term)) {
+											$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+										} else {
+											$ufficio_id = get_query_var('ufficio');
+
+											if ($ufficio_id == "") {
+												$ufficio_id = dci_get_meta("organizzazioni", "_dci_persona_pubblica_", $post->ID)[0] ?? "";
+											}
+
+											if ($ufficio_id !== "") {
+												$term = get_the_terms($ufficio_id, "tipi_unita_organizzativa")[0];
+												$ufficio = get_post($ufficio_id);
+
+												if (isset($term)) {
+													$this->items[] = "<a href='" . get_term_link($term->term_id) . "'>" . get_formatted_name($term->name) . "</a>";
+												}
+
+												$this->items[] = "<a href='" . get_permalink($ufficio_id) . "'>" . $ufficio->post_title . "</a>";
+											}
+										}
 									}
 								}
 							} else {
