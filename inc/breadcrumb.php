@@ -513,8 +513,8 @@ class Breadcrumb_Trail
 				}
 
 				if (get_post_type() == 'luogo') {
-					$this->items[] =  "<a href='" . home_url("vivere-il-comune") . "'>" . __("Vivere il comune", "design_comuni_italia") . "</a>";
-					$this->items[] =  "<a href='" . home_url("luoghi") . "'>" . __("Luoghi", "design_comuni_italia") . "</a>";
+					$this->items[] =  "<a href='" . ml_home_url("vivere-il-comune", $lang) . "'>" . __("Vivere il comune", "design_comuni_italia") . "</a>";
+					$this->items[] =  "<a href='" . ml_home_url("luoghi", $lang) . "'>" . __("Luoghi", "design_comuni_italia") . "</a>";
 					$terms = get_the_terms(get_the_ID(), 'tipi_luogo');
 					if ($terms) {
 						foreach ($terms as $term) {
