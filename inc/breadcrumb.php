@@ -672,7 +672,7 @@ class Breadcrumb_Trail
 						$this->items[] = get_formatted_name($term_name);
 					} else if (is_tax(array("tipi_luogo"))) {
 						$this->items[] = "<a href='" . ml_home_url("vivere-il-comune", $lang) . "'>" . __("Vivere il comune", "design_comuni_italia") . "</a>";
-						$this->items[] = "<a href='" . ml_home_url("luoghi", $lang) . "'>" . __("Luoghi", "design_comuni_italia") . "</a>";
+						$this->items[] = "<a href='" . ml_home_url("Luoghi", $lang) . "'>" . __("Luoghi", "design_comuni_italia") . "</a>";
 						$term_name = single_term_title('', false);
 						$this->items[] = get_formatted_name($term_name);
 					} else {
