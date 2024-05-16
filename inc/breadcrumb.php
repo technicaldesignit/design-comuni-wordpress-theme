@@ -487,7 +487,8 @@ class Breadcrumb_Trail
 				}
 
 				if (get_post_type() == 'documento_pubblico') {
-					$this->items[] =  "<a href='" . home_url("documento_pubblico") . "'>" . __("Documenti pubblici", "design_comuni_italia") . "</a>";
+					$this->items[] =  "<a href='" . ml_home_url("amministrazione", $lang) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+					$this->items[] =  "<a href='" . home_url("documenti-e-dati", $lang) . "'>" . __("Documenti e dati", "design_comuni_italia") . "</a>";
 					$terms = get_the_terms(get_the_ID(), 'tipi_documento');
 					if ($terms) {
 						foreach ($terms as $term) {
