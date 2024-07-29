@@ -655,6 +655,7 @@ class Breadcrumb_Trail
 						$this->items[] = "<a href='" . ml_home_url("Argomenti", $lang) . "'>" . __("Argomenti", "design_comuni_italia") . "</a>";
 						$this->items[] = single_term_title('', false);
 					} else if (is_tax(array("tipi_documento"))) {
+						$this->items[] = "<a href='" . ml_home_url("Amministrazione", $lang) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
 						$this->items[] = "<a href='" . ml_home_url("documenti-e-dati", $lang) . "'>" . __("Documenti e dati", "design_comuni_italia") . "</a>";
 						$term_name = single_term_title('', false);
 						$this->items[] = __(dci_get_breadcrumb_label($term_name), "design_comuni_italia");
