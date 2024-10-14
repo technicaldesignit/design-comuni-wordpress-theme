@@ -145,7 +145,8 @@ function dci_get_sercheable_tipologie() {
         'seduta_consiliare',
         'commissione_cons',
         'glossario_rifiuto',
-        'page'
+        'page',
+        'archivio_storico'
     );
 
     if(get_option('tema')['disabilita_amm_trasp'] != "on") {
