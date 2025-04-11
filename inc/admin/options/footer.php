@@ -90,6 +90,12 @@ function dci_register_footer_options()
         'type' => 'text',
     ));
 
+    $footer_options->add_field( array(
+        'id' => $prefix . 'contatti_PEC',
+        'name' => 'Posta Elettronica Certificata (PEC)',
+        'type' => 'text_email',
+    ) );
+
     $footer_options->add_field(array(
         'id' => $prefix . 'contatti_URP',
         'name'    => __('Ufficio Relazioni con il Pubblico (URP)', 'design_comuni_italia'),
