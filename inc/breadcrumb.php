@@ -526,6 +526,19 @@ class Breadcrumb_Trail
 					return;
 				}
 
+				if (get_post_type() == 'incarico') {
+					$this->items[] =  "<a href='" . ml_home_url("amministrazione", $lang) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+					$this->items[] =  "<a href='" . ml_home_url("incarichi", $lang) . "'>" . __("Incarichi", "design_comuni_italia") . "</a>";
+					/* $terms = get_the_terms(get_the_ID(), 'tipi_incarico');
+					if ($terms) {
+						foreach ($terms as $term) {
+							$this->items[] = sprintf('<a href="%s">%s</a>', esc_url(get_term_link($term, 'tipi_incarico')), $term->name);
+						}
+					} */
+					$this->items[] = get_the_title();
+					return;
+				}
+
 				$group_name = dci_get_group_name(get_post_type());
 				//console_log($group_name);
 				switch ($group_name) {
@@ -665,6 +678,7 @@ class Breadcrumb_Trail
 						$this->items[] = __(dci_get_breadcrumb_label($term_name), "design_comuni_italia");
 					} else if (is_tax(array("tipi_incarico"))) {
 						$this->items[] = "<a href='" . ml_home_url("Amministrazione", $lang) . "'>" . __("Amministrazione", "design_comuni_italia") . "</a>";
+						$this->items[] = "<a href='" . ml_home_url("Incarichi", $lang) . "'>" . __("Incarichi", "design_comuni_italia") . "</a>";
 						$term_name = single_term_title('', false);
 						$this->items[] = get_formatted_name($term_name);
 					} else if (is_tax(array("tipi_evento"))) {
