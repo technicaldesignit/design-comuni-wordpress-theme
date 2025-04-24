@@ -265,7 +265,11 @@ function dci_get_bootstrap_icon_options($category = 'all'){
         'it-youtube' => 'it-youtube',
         'it-google' => 'it-google',
         'it-designers-italia'=>'it-designers-italia',
-        'it-team-digitale'=>'it-team-digitale'
+        'it-team-digitale'=>'it-team-digitale',
+        'it-android' => 'it-android',
+        'it-android-square' => 'it-android-square',
+        'it-apple' => 'it-apple',
+        'it-apple-square' => 'it-apple-square',
     );
     $social = array(
         'it-facebook' => 'it-facebook',
@@ -286,6 +290,10 @@ function dci_get_bootstrap_icon_options($category = 'all'){
         'it-youtube' => 'it-youtube',
         'it-google' => 'it-google',
         'it-behance' => 'it-behance',
+        'it-android' => 'it-android',
+        'it-android-square' => 'it-android-square',
+        'it-apple' => 'it-apple',
+        'it-apple-square' => 'it-apple-square',
     );
     $extra =array(
         'it-designers-italia'=>'it-designers-italia',

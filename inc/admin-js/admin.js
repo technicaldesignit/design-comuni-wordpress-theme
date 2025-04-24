@@ -150,6 +150,10 @@ function loadSvg(){
         'it-google',
         'it-designers-italia',
         'it-team-digitale',
+        'it-android',
+        'it-android-square',
+        'it-apple',
+        'it-apple-square',
     ];
     options.forEach(element => jQuery('.' + element).html('<img src= "' + theme_folder +'/assets/svg/' + element + '.svg" alt="'+element+'" style="width:30px; margin-right:10px;">'));
 }
