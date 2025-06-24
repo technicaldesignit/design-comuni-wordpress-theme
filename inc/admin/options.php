@@ -58,7 +58,9 @@ function dci_options_display_with_tabs( $cmb_options ) {
         <div class="cmb2-options-box">
             <div class="nav-tab-wrapper">
                 <?php foreach ( $tabs as $option_key => $tab_title ) : ?>
-                    <a class="nav-tab<?php if ( isset( $_GET['page'] ) && $option_key === $_GET['page'] ) : ?> nav-tab-active<?php endif; ?>" href="<?php menu_page_url( $option_key ); ?>"><?php echo wp_kses_post( $tab_title ); ?></a>
+                    <?php if(!(!is_super_admin() & ($option_key == "acuity" || $option_key == "tema"|| $option_key == "dci_options"))) {?>
+                        <a class="nav-tab<?php if ( isset( $_GET['page'] ) && $option_key === $_GET['page'] ) : ?> nav-tab-active<?php endif; ?>" href="<?php menu_page_url( $option_key ); ?>"><?php echo wp_kses_post( $tab_title ); ?></a>
+                    <?php } ?>
                 <?php endforeach; ?>
             </div>
 
