@@ -176,9 +176,10 @@ function dci_add_unita_organizzativa_metaboxes() {
             'placeholder' =>  __( 'Seleziona la Persona Pubblica', 'design_comuni_italia' ),
         )
     ) );
-    
+
 
     //PERSONE
+    $is_required = td_get_option("TDPersonaFacUO") != "1"; //rende facoltativa la scelta delle persone nelle unità organizzative
     $cmb_persone = new_cmb2_box( array(
         'id'           => $prefix . 'box_persone',
         'title'        => __( 'Persone', 'design_comuni_italia' ),
@@ -188,14 +189,15 @@ function dci_add_unita_organizzativa_metaboxes() {
     ) );
     $cmb_persone->add_field( array(
         'id' => $prefix . 'persone_struttura',
-        'name'    => __( 'Persone che compongono la struttura *', 'design_comuni_italia' ),
+        'name' => $is_required ? __( 'Persone che compongono la struttura *', 'design_comuni_italia' ) : __( 'Persone che compongono la struttura', 'design_comuni_italia' ),
         'desc' => __( 'Un link alla scheda persona per ciascuno dei componenti della struttura.' , 'design_comuni_italia' ),
         'type'    => 'pw_multiselect',
         'options' => dci_get_posts_options('persona_pubblica'),
-        'attributes'    => array(
-            'required'    => 'required',
-            'placeholder' =>  __( 'Seleziona le Persone Pubbliche', 'design_comuni_italia' ),
-
+        'attributes' => array_merge(
+            $is_required ? array('required' => 'required') : array(),
+            array(
+                'placeholder' => __( 'Seleziona le Persone Pubbliche', 'design_comuni_italia' ),
+            )
         ),
     ) );
 
