@@ -24,6 +24,7 @@
                     data-bs-target="#search-modal"
                     aria-label="Cerca nel sito"
                   >
+                    <span class="visually-hidden">Cerca nel sito</span>
                     <svg class="icon icon-md">
                       <use
                         href="#it-arrow-left"
@@ -39,6 +40,7 @@
                     data-dismiss="modal" 
                     aria-label="Chiudi e torna alla pagina precedente"
                   >
+                    <span class="visually-hidden">Chiudi e torna alla pagina precedente</span>
                     <svg class="icon icon-md">
                       <use
                         href="#it-close-big"
