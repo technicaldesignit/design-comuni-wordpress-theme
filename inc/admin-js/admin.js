@@ -47,6 +47,7 @@ function loadSvg(){
         'it-burger',
         'it-calendar',
         'it-camera',
+        'it-file-image',
         'it-card',
         'it-chart-line',
         'it-check',
@@ -154,6 +155,7 @@ function loadSvg(){
         'it-android-square',
         'it-apple',
         'it-apple-square',
+        'it-vimeo',
     ];
     options.forEach(element => jQuery('.' + element).html('<img src= "' + theme_folder +'/assets/svg/' + element + '.svg" alt="'+element+'" style="width:30px; margin-right:10px;">'));
 }
