@@ -28,7 +28,7 @@ aria-labelledby="modalrightTitle"
                 <h2 class="modal-title h5 no_toc" id="modalrightTitle">
                     <?php echo $wp_query->found_posts; ?> Risultati
                 </h2>
-                <button type="button" onclick="location.href='?s=<?php echo get_search_query(); ?>'">
+                <button type="button" onclick="location.href='?s=<?php echo esc_js( get_search_query() ); ?>'">
                 Rimuovi tutti i filtri
                 </button>
             </div>
@@ -42,6 +42,11 @@ aria-labelledby="modalrightTitle"
                             <?php 
                                 foreach ($tipologie as $type_slug) {
                                     $tipologia = get_term_by('slug', $type_slug);
+
+                                    $plural_name = COMUNI_TIPOLOGIE[$type_slug]['plural_name'] ?? '';
+                                    if ( !$plural_name && post_type_exists( $type_slug ) ) {
+                                        $plural_name = get_post_type_object( $type_slug )->labels->name;
+                                    }
                             ?>
                             <li>
                                 <div class="form-check">
@@ -57,7 +62,7 @@ aria-labelledby="modalrightTitle"
                                     <label
                                         for="mobile-<?php echo $type_slug; ?>" 
                                         class="subtitle-small_semi-bold mb-0 category-list__list"
-                                        ><?php echo COMUNI_TIPOLOGIE[$type_slug]['plural_name']; ?>
+                                        ><?php echo $plural_name; ?>
                                         </label
                                     >
                                     </div>
@@ -135,7 +140,7 @@ aria-labelledby="modalrightTitle"
     };
 
     const goToResults = () => {
-        let newQuery = '?s=<?php echo get_search_query(); ?>';
+        let newQuery = '?s=<?php echo esc_js( get_search_query() ); ?>';
         for (const type of queryParams?.postTypes) {
             newQuery += `&post_types[]=${type}`;
         }
