@@ -163,6 +163,7 @@ function dci_get_bootstrap_icon_options($category = 'all'){
         'it-burger'=> 'it-burger',
         'it-calendar'=> 'it-calendar',
         'it-camera'=> 'it-camera',
+        'it-file-image'=> 'it-file-image',
         'it-card'=> 'it-card',
         'it-chart-line'=> 'it-chart-line',
         'it-check'=> 'it-check',
@@ -270,6 +271,7 @@ function dci_get_bootstrap_icon_options($category = 'all'){
         'it-android-square' => 'it-android-square',
         'it-apple' => 'it-apple',
         'it-apple-square' => 'it-apple-square',
+        'it-vimeo' => 'it-vimeo',
     );
     $social = array(
         'it-facebook' => 'it-facebook',
@@ -294,6 +296,8 @@ function dci_get_bootstrap_icon_options($category = 'all'){
         'it-android-square' => 'it-android-square',
         'it-apple' => 'it-apple',
         'it-apple-square' => 'it-apple-square',
+        'it-vimeo' => 'it-vimeo',
+        'it-file-image' => 'it-file-image',
     );
     $extra =array(
         'it-designers-italia'=>'it-designers-italia',

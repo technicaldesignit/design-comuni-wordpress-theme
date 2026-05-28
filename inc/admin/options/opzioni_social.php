@@ -11,7 +11,7 @@ function dci_register_social_options(){
         'title'        => esc_html__( 'Socialmedia', 'design_comuni_italia' ),
         'object_types' => array( 'options-page' ),
         'option_key'   => 'socials',
-        'capability'    => 'manage_options',
+        'capability'    => 'configurazione',
         'parent_slug'  => 'dci_options',
         'tab_group'    => 'dci_options',
         'tab_title'    => __('Socialmedia', "design_comuni_italia"),	);

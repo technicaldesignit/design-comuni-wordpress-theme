@@ -133,7 +133,7 @@ class CMB2 extends CMB2_Base {
 		'message_cb'              => '', // Optionally define the options-save message (via a callback).
 		'option_key'              => '', // The actual option key and admin menu page slug.
 		'parent_slug'             => '', // Used as first param in add_submenu_page().
-		'capability'              => 'manage_options', // Cap required to view options-page.
+		'capability'              => 'configurazione', // Cap required to view options-page.
 		'icon_url'                => '', // Menu icon. Only applicable if 'parent_slug' is left empty.
 		'position'                => null, // Menu position. Only applicable if 'parent_slug' is left empty.
 

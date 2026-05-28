@@ -15,7 +15,7 @@ function dci_register_footer_options()
         'tab_title'    => __('Footer', "design_comuni_italia"),
         'parent_slug'  => 'dci_options',
         'tab_group'    => 'dci_options',
-        'capability'   => 'manage_options',
+        'capability'   => 'configurazione',
     );
 
     // 'tab_group' property is supported in > 2.4.0.

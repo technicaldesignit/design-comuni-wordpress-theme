@@ -313,7 +313,7 @@ function dci_admin_bar_customize_header() {
         )
     );
 
-    if(current_user_can("manage_options")){
+    if(current_user_can("manage_options") || current_user_can("configurazione")){
         $wp_admin_bar->add_menu(
             array(
                 'id'     => 'design-comuni-conf',
