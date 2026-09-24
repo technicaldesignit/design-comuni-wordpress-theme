@@ -1126,7 +1126,7 @@ if(!function_exists("dci_get_img")) {
 
         $img = '<img src="'.$url.'" ';        
         if ($classes) $img .= 'class="'.$classes.'" ';
-        if ($image_alt) $img .= 'alt="'.$image_alt.'" ';
+        $img .= 'alt="'.esc_attr($image_alt).'" ';
         if ($image_title) $img .= 'title="'.$image_title.'" ';
         $img .= '/>';
 

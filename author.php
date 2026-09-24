@@ -143,7 +143,7 @@ $posts = get_posts($args);
                     <div class="col-12 col-sm-3 col-lg-3 d-none d-sm-block">
                         <div class="section-thumb thumb-large mx-3">
                             <?php if($image_url) {
-                                echo "<img src='".$image_url."' />";
+                                echo "<img src='".$image_url."' alt='".esc_attr(dci_get_display_name($author_id))."' />";
                             } ?>
                         </div><!-- /section-thumb -->
                     </div><!-- /col-lg-2 -->
